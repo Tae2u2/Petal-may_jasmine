@@ -36,14 +36,12 @@ const Auth = () => {
           password
         ).then((userCredential) => {
           const user = userCredential.user;
-          console.log(`회원가입user : ${user}`);
         });
       } else {
         //로그인
         data = signInWithEmailAndPassword(authService, email, password).then(
           (userCredential) => {
             const user = userCredential.user;
-            console.log(`로그인user : ${user}`);
           }
         );
       }
