@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authService, dbService } from "fbase";
 import { getDocs, orderBy, where, query, collection } from "firebase/firestore";
-import { updateProfile } from "firebase/auth";
+import { updateProfile, signOut } from "firebase/auth";
 
 const Profile = ({ userObj, refreshUser }) => {
   const navigate = useNavigate();
@@ -18,7 +18,6 @@ const Profile = ({ userObj, refreshUser }) => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    console.log(userObj);
     if (newDisplayName !== userObj.displayName) {
       await updateProfile(authService.currentUser, {
         displayName: newDisplayName,
@@ -30,8 +29,11 @@ const Profile = ({ userObj, refreshUser }) => {
   };
 
   const onLogOutClick = () => {
-    authService.signOut();
-    navigate("/");
+    signOut(authService)
+      .then(() => navigate("/", { replace: true }))
+      .catch((error) => {
+        alert("죄송합니다. 다시 시도해주세요!");
+      });
   };
 
   const getMyPetals = async () => {
@@ -54,6 +56,11 @@ const Profile = ({ userObj, refreshUser }) => {
   };
 
   useEffect(() => {
+    if (userObj.displayName == null) {
+      updateProfile(authService.currentUser, {
+        displayName: "jasmine",
+      });
+    }
     getMyPetals();
   }, []);
 
@@ -68,7 +75,7 @@ const Profile = ({ userObj, refreshUser }) => {
         />
         <input type="submit" value="Update Profile" />
       </form>
-      <button onClick={onLogOutClick}>Log Out</button>
+      <button onClick={onLogOutClick}>signOut</button>
       <div>
         {myPetals.map((my, index) => (
           <div key={index}>

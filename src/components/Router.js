@@ -15,7 +15,13 @@ function AppRouter({ isLoggedIn, userObj, refreshUser }) {
             <Route path="/" element={<Home userObj={userObj} />}></Route>
             <Route
               path="/profile"
-              element={<Profile refreshUser={refreshUser} userObj={userObj} />}
+              element={
+                <Profile
+                  refreshUser={refreshUser}
+                  isLoggedIn={isLoggedIn}
+                  userObj={userObj}
+                />
+              }
             ></Route>
           </>
         ) : (
