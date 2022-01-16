@@ -4,6 +4,8 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { authService } from "fbase";
+import styles from "css/AuthStyle.module.css";
+import jasminelogo from "images/jasmineBtn.png";
 
 const AuthForm = () => {
   const [email, setEmail] = useState("");
@@ -53,31 +55,40 @@ const AuthForm = () => {
   const toggleAccount = () => setNewAccount((prev) => !prev);
 
   return (
-    <>
+    <div className={styles.authFormDep}>
+      <img className={styles.jasmineLogo} src={jasminelogo} alt="logo" />
+      <span className={styles.authToggle} onClick={toggleAccount}>
+        I want {newAccount ? "Sign In" : "Create Account"}
+      </span>
       <form onSubmit={onSubmit}>
         <input
           name="email"
           type="email"
+          className={styles.authInput}
           onChange={onChange}
           value={email}
           placeholder="Email"
           required
         />
+        <br />
         <input
           name="password"
           type="password"
+          className={styles.authInput}
           onChange={onChange}
           value={password}
           placeholder="password"
           required
         />
-        <input type="submit" value={newAccount ? "Create Account" : "Log In"} />
+        <br />
+        <input
+          className={styles.authBtn}
+          type="submit"
+          value={newAccount ? "Create Account" : "Log In"}
+        />
         {error}
       </form>
-      <span onClick={toggleAccount}>
-        {newAccount ? "Sign In" : "Create Account"}
-      </span>
-    </>
+    </div>
   );
 };
 

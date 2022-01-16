@@ -2,6 +2,7 @@ import AppRouter from "components/Router";
 import { authService } from "fbase";
 import { useEffect, useState } from "react";
 import { updateProfile } from "firebase/auth";
+import styles from "css/AuthStyle.module.css";
 
 function App() {
   const [init, setInit] = useState(false);
@@ -35,7 +36,7 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <div className={styles.settingApp}>
       {init ? (
         <AppRouter
           isLoggedIn={Boolean(userObj)}

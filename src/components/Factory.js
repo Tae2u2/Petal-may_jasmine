@@ -3,6 +3,7 @@ import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { dbService, storageService } from "fbase";
 import { v4 as uuidv4 } from "uuid";
 import { addDoc, collection } from "firebase/firestore";
+import style from "css/HomeStyle.module.css";
 
 const Factory = ({ userObj }) => {
   const [petal, setPetal] = useState("");
@@ -84,26 +85,42 @@ const Factory = ({ userObj }) => {
 
   return (
     <form onSubmit={onSubmit}>
-      <input
-        value={petal}
-        onChange={onChange}
-        type="text"
-        placeholder="Count your petals."
-        maxLength={140}
-      />
-      <input
-        type="file"
-        ref={fileInput}
-        accept="image/*"
-        onChange={onFileChange}
-      />
-      <input type="submit" value="take Off" />
-      {attachment && (
-        <div>
-          <img src={attachment} width="50px" height="50px" />
-          <button onClick={onClearAttachment}>Clear</button>
+      <div className={style.textBox}>
+        <input
+          value={petal}
+          onChange={onChange}
+          className={style.homeInput}
+          type="text"
+          placeholder="Count your petals."
+          maxLength={140}
+        />
+        <small style={{ color: "#bdbdbd", textAlign: "right" }}>
+          *({petal.length}/140)
+        </small>
+        <div className={style.together}>
+          <input
+            type="file"
+            className={style.homeFileBox}
+            ref={fileInput}
+            accept="image/*"
+            onChange={onFileChange}
+          />
+          {attachment && (
+            <div className={style.viewBox}>
+              <img
+                src={attachment}
+                alt="preview photo"
+                width="70px"
+                height="70px"
+              />
+              <button className={style.clearBtn} onClick={onClearAttachment}>
+                Clear
+              </button>
+            </div>
+          )}
         </div>
-      )}
+        <input type="submit" className={style.homeLi} value="take Off" />
+      </div>
     </form>
   );
 };

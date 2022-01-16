@@ -1,0 +1,120 @@
+.homeNav {
+  width: 100vw;
+  height: 100px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 215, 1) 0%,
+    rgba(196, 230, 149, 1) 100%
+  );
+}
+.homeUl {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.homeLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  font-size: 1.1em;
+  letter-spacing: -1px;
+}
+.homeLi {
+  list-style: none;
+  padding: 20px 30px;
+  margin: 0px 20px;
+  border: none;
+  border-radius: 20px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 215, 1) 0%,
+    rgba(196, 230, 149, 1) 100%
+  );
+  box-shadow: 3px 3px 2px rgb(144, 177, 98);
+  cursor: pointer;
+}
+
+ion-icon {
+  font-size: 2em;
+  margin-right: 4px;
+  color: #33691e;
+}
+
+.homeLi:active {
+  box-shadow: 1px 1px 2px rgb(144, 177, 98), inset 4px 4px 2px rgb(144, 177, 98);
+}
+
+.homeDep {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.textBox {
+  width: 450px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 30px;
+  padding: 10px;
+  background-color: rgba(255, 255, 215, 0.4);
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px rgba(82, 82, 94, 0.7);
+}
+.homeInput {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-size: 1em;
+  padding: 5px 15px;
+  margin-top: 20px;
+  border-bottom: 1px solid black;
+}
+.homeFileBox {
+  width: 200px;
+  padding-bottom: 15px;
+  padding-left: 23px;
+}
+::-webkit-file-upload-button {
+  padding: 15px 17px;
+  margin-right: 15px;
+  border: none;
+  border-radius: 15px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 215, 1) 0%,
+    rgba(196, 230, 149, 1) 100%
+  );
+  box-shadow: 3px 3px 2px rgb(144, 177, 98);
+  cursor: pointer;
+}
+.together {
+  display: flex;
+  justify-content: space-evenly;
+}
+.viewBox {
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.clearBtn {
+  padding: 10px 17px;
+  margin-left: 15px;
+  border: none;
+  border-radius: 15px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 215, 1) 0%,
+    rgba(196, 230, 149, 1) 100%
+  );
+  box-shadow: 3px 3px 2px rgb(144, 177, 98);
+  cursor: pointer;
+}

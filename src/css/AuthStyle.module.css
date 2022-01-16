@@ -1,0 +1,99 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+.authDep {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.authBundle {
+  width: 400px;
+  height: 600px;
+  background-color: rgb(139, 156, 156, 0.2);
+  border-radius: 20px;
+  box-shadow: 5px 5px 2px rgb(139, 156, 156);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.authFormDep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.jasmineLogo {
+  width: 150px;
+  height: 90px;
+  cursor: pointer;
+}
+.authInput {
+  padding: 15px 15px;
+  margin: 5px;
+  border: none;
+  border-radius: 20px;
+  background-color: #fff;
+  color: black;
+  font-size: 1.1em;
+}
+.authBtn {
+  width: 240px;
+  padding: 15px 15px;
+  margin: 5px;
+  border: none;
+  border-radius: 20px;
+  background: rgb(255, 255, 215);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 215, 1) 0%,
+    rgba(196, 230, 149, 1) 100%
+  );
+  box-shadow: 3px 3px 2px rgb(144, 177, 98);
+  font-size: 1.1em;
+  font-weight: 600;
+  color: #1b5e20;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.authBtn:active {
+  box-shadow: 1px 1px 2px rgb(144, 177, 98), inset 4px 4px 2px rgb(144, 177, 98);
+}
+.authToggle {
+  width: 200px;
+  padding: 15px 15px;
+  margin: 5px;
+  border: 5px solid #fff;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 1.1em;
+  font-weight: 600;
+  color: #1b5e20;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 215, 1) 0%,
+    rgba(196, 230, 149, 1) 100%
+  );
+  box-shadow: 2px 2px 2px rgb(139, 156, 156);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.authToggle:active {
+  transform: rotateY(180deg);
+}
+.icons {
+  position: absolute;
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 20px;
+  color: black;
+  font-size: 1.5em;
+  transform: translateY(-4px);
+}

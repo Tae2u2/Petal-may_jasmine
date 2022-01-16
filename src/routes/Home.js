@@ -3,6 +3,7 @@ import { dbService } from "fbase";
 import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import Petals from "components/Petals";
 import Factory from "components/Factory";
+import style from "css/HomeStyle.module.css";
 
 const Home = ({ userObj }) => {
   const [petals, setPetals] = useState([]);
@@ -22,7 +23,7 @@ const Home = ({ userObj }) => {
   }, []);
 
   return (
-    <div>
+    <div className={style.homeDep}>
       <Factory userObj={userObj} />
       <div>
         {petals.map((petal) => (

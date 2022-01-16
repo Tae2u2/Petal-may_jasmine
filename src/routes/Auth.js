@@ -5,6 +5,7 @@ import {
 } from "firebase/auth";
 import { authService } from "fbase";
 import AuthForm from "components/AuthForm";
+import styles from "css/AuthStyle.module.css";
 
 const Auth = () => {
   const onSocialClick = async (event) => {
@@ -20,15 +21,35 @@ const Auth = () => {
     const data = await signInWithPopup(authService, provider);
   };
   return (
-    <div>
-      <AuthForm />
-      <div>
-        <button onClick={onSocialClick} name="google">
-          Continue With Google
-        </button>
-        <button onClick={onSocialClick} name="github">
-          Continue With Github
-        </button>
+    <div className={styles.authDep}>
+      <div className={styles.authBundle}>
+        <AuthForm />
+        <div>
+          <button
+            className={styles.authBtn}
+            onClick={onSocialClick}
+            name="google"
+          >
+            <span className={styles.icons}>
+              <ion-icon
+                name="logo-google"
+                style={{ color: "#D84315" }}
+              ></ion-icon>
+            </span>
+            With Google
+          </button>
+          <br />
+          <button
+            className={styles.authBtn}
+            onClick={onSocialClick}
+            name="github"
+          >
+            <span className={styles.icons}>
+              <ion-icon name="logo-github"></ion-icon>
+            </span>
+            With Github
+          </button>
+        </div>
       </div>
     </div>
   );
