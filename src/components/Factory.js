@@ -91,10 +91,11 @@ const Factory = ({ userObj }) => {
           onChange={onChange}
           className={style.homeInput}
           type="text"
-          placeholder="Count your petals."
+          placeholder="당신이 가장 빛나는 순간을 기록하세요"
           maxLength={140}
+          required
         />
-        <small style={{ color: "#bdbdbd", textAlign: "right" }}>
+        <small style={{ color: "#424242", textAlign: "right" }}>
           *({petal.length}/140)
         </small>
         <div className={style.together}>
@@ -119,7 +120,7 @@ const Factory = ({ userObj }) => {
             </div>
           )}
         </div>
-        <input type="submit" className={style.homeLi} value="take Off" />
+        <input type="submit" className={style.homeLi} value="기록하기" />
       </div>
     </form>
   );

@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { authService, dbService } from "fbase";
+import { authService, dbService, storageService } from "fbase";
 import { getDocs, orderBy, where, query, collection } from "firebase/firestore";
 import { updateProfile, signOut } from "firebase/auth";
+
+import style from "css/HomeStyle.module.css";
 
 const Profile = ({ userObj, refreshUser }) => {
   const navigate = useNavigate();
@@ -54,7 +56,6 @@ const Profile = ({ userObj, refreshUser }) => {
     );
     setMyPetals(myArr);
   };
-
   useEffect(() => {
     if (userObj.displayName == null) {
       updateProfile(authService.currentUser, {
@@ -65,24 +66,36 @@ const Profile = ({ userObj, refreshUser }) => {
   }, []);
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-        <input
-          type="text"
-          value={newDisplayName}
-          onChange={onChange}
-          placeholder="Display Name"
-        />
-        <input type="submit" value="Update Profile" />
-      </form>
-      <button onClick={onLogOutClick}>signOut</button>
-      <div>
+    <div className={style.homeDep}>
+      <div className={style.editNameBox}>
+        <h3>이름을 설정하고 변경하세요!</h3>
+        <form className={style.together} onSubmit={onSubmit}>
+          <input
+            className={style.nameEdit}
+            type="text"
+            value={newDisplayName}
+            onChange={onChange}
+            placeholder="Display Name"
+          />
+          <input type="submit" className={style.clearBtn} value="이름바꾸기" />
+        </form>
+        <button
+          onClick={onLogOutClick}
+          style={{ marginTop: "15px", marginLeft: "50px", width: "400px" }}
+          className={style.clearBtn}
+        >
+          로그아웃
+        </button>
+      </div>
+
+      <div className={style.homeDep}>
         {myPetals.map((my, index) => (
-          <div key={index}>
-            <h4>{my.myText}</h4>
+          <div key={index} className={style.textBox}>
+            <h4 style={{ marginBottom: "5px" }}>{userObj.displayName}</h4>
+            <p className={style.contents}>{my.myText}</p>
             {my.myUrl && (
-              <div>
-                <img src={my.myUrl} width="50px" height="50px" />
+              <div className={style.together}>
+                <img src={my.myUrl} width="250px" height="250px" />
               </div>
             )}
           </div>

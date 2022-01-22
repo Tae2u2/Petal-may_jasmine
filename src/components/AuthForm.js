@@ -58,7 +58,7 @@ const AuthForm = () => {
     <div className={styles.authFormDep}>
       <img className={styles.jasmineLogo} src={jasminelogo} alt="logo" />
       <span className={styles.authToggle} onClick={toggleAccount}>
-        I want {newAccount ? "Sign In" : "Create Account"}
+        {newAccount ? "이미 회원이신가요?" : "계정을 만들고 싶습니다."}
       </span>
       <form onSubmit={onSubmit}>
         <input
@@ -67,7 +67,7 @@ const AuthForm = () => {
           className={styles.authInput}
           onChange={onChange}
           value={email}
-          placeholder="Email"
+          placeholder="이메일"
           required
         />
         <br />
@@ -77,14 +77,14 @@ const AuthForm = () => {
           className={styles.authInput}
           onChange={onChange}
           value={password}
-          placeholder="password"
+          placeholder="비밀번호"
           required
         />
         <br />
         <input
           className={styles.authBtn}
           type="submit"
-          value={newAccount ? "Create Account" : "Log In"}
+          value={newAccount ? "계정생성" : "로그인"}
         />
         {error}
       </form>

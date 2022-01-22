@@ -6,6 +6,10 @@
 body {
   width: 100vw;
   height: 100vh;
+  overflow-x: hidden;
+  background-image: url("../images/grass.jpg");
+  background-repeat: repeat;
+  background-size: contain;
 }
 
 .authDep {
@@ -16,7 +20,8 @@ body {
 .authBundle {
   width: 400px;
   height: 600px;
-  background-color: rgb(139, 156, 156, 0.2);
+  margin-top: 50px;
+  background-color: rgb(139, 156, 156, 0.5);
   border-radius: 20px;
   box-shadow: 5px 5px 2px rgb(139, 156, 156);
   display: flex;
@@ -44,6 +49,9 @@ body {
   font-size: 1.1em;
 }
 .authBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 240px;
   padding: 15px 15px;
   margin: 5px;
@@ -66,7 +74,7 @@ body {
   box-shadow: 1px 1px 2px rgb(144, 177, 98), inset 4px 4px 2px rgb(144, 177, 98);
 }
 .authToggle {
-  width: 200px;
+  width: 240px;
   padding: 15px 15px;
   margin: 5px;
   border: 5px solid #fff;
@@ -88,12 +96,10 @@ body {
 .authToggle:active {
   transform: rotateY(180deg);
 }
-.icons {
-  position: absolute;
+ion-icon {
   display: flex;
-  justify-content: flex-start;
-  padding-left: 20px;
+  justify-content: center;
+  align-items: center;
   color: black;
-  font-size: 1.5em;
-  transform: translateY(-4px);
+  width: 30px;
 }

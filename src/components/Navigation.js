@@ -10,6 +10,9 @@ const Navigation = ({ userObj }) => {
             <ion-icon name="flower-outline"></ion-icon>Home
           </Link>
         </li>
+        <li>
+          <h1 className={style.logoName}>Petal, May Jasmine</h1>
+        </li>
         <li className={style.homeLi}>
           <Link to="/profile" className={style.homeLink}>
             <ion-icon name="person-circle-outline"></ion-icon>

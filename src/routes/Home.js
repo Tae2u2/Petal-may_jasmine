@@ -30,6 +30,7 @@ const Home = ({ userObj }) => {
           <Petals
             key={petal.id}
             petalObj={petal}
+            userObj={userObj}
             isOwner={petal.writerId === userObj.uid}
           />
         ))}

@@ -30,23 +30,18 @@ const Auth = () => {
             onClick={onSocialClick}
             name="google"
           >
-            <span className={styles.icons}>
-              <ion-icon
-                name="logo-google"
-                style={{ color: "#D84315" }}
-              ></ion-icon>
-            </span>
+            <ion-icon
+              name="logo-google"
+              style={{ color: "#D84315" }}
+            ></ion-icon>
             With Google
           </button>
-          <br />
           <button
             className={styles.authBtn}
             onClick={onSocialClick}
             name="github"
           >
-            <span className={styles.icons}>
-              <ion-icon name="logo-github"></ion-icon>
-            </span>
+            <ion-icon name="logo-github"></ion-icon>
             With Github
           </button>
         </div>
