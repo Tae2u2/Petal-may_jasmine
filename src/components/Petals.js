@@ -7,6 +7,7 @@ import style from "css/HomeStyle.module.css";
 const Petals = ({ petalObj, isOwner, userObj }) => {
   const [editing, setEditing] = useState(false);
   const [revisedPetal, setrevisedPetal] = useState(petalObj.text);
+  const [counting, setCounting] = useState(0);
 
   const petalTextRef = doc(dbService, "petals", petalObj.id);
   const onDeleteClick = async () => {
@@ -34,19 +35,51 @@ const Petals = ({ petalObj, isOwner, userObj }) => {
     setEditing(false);
   };
 
-  const ownBtnHandle = (event) => {};
+  /*이거 맘에드는 글을 저장하는 기능 추가해보기 */
+  const [likeList, setLikeList] = useState({});
+
+  const saveLike = (event) => {
+    const myLike = event.target.id;
+    if (myLike === petalObj.id) {
+      setLikeList({ ...petalObj });
+      console.log(likeList);
+    }
+  };
+
+  const likeHandle = (event) => {
+    setCounting(counting + 1);
+  };
 
   const toggleEditing = () => setEditing((prev) => !prev);
   return (
     <div className={style.textBox} style={{ position: "relative" }}>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <h4 style={{ marginBottom: "5px" }}>{userObj.displayName}</h4>
-        <span
-          style={{ cursor: "pointer", transform: "translateY(-6px)" }}
-          onClick={ownBtnHandle}
-        >
-          <ion-icon name="flower-outline"></ion-icon>
-        </span>
+        <h4 style={{ marginBottom: "5px" }}>{petalObj.writer}</h4>
+        <div style={{ display: "flex" }}>
+          <span
+            style={{
+              cursor: "pointer",
+              transform: "translateY(-6px)",
+            }}
+            onClick={saveLike}
+            id={petalObj.id}
+          >
+            <ion-icon name="flower-outline" id={petalObj.id}></ion-icon>
+          </span>
+          <span
+            style={{
+              display: "flex",
+              cursor: "pointer",
+              transform: "translateY(-6px)",
+            }}
+            onClick={likeHandle}
+          >
+            <ion-icon name="heart-circle-outline"></ion-icon>
+            <small style={{ color: "#bdbdbd", transform: "translateY(6px)" }}>
+              {counting}
+            </small>
+          </span>
+        </div>
       </div>
       {editing ? (
         <div className={style.contentsBox}>

@@ -18,7 +18,7 @@ function App() {
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
       if (user) {
-        if (user.displayName == null) {
+        if (user.displayName === null) {
           updateProfile(user, {
             displayName: "jasmine",
           });

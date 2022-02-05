@@ -16,7 +16,6 @@ const Factory = ({ userObj }) => {
     if (attachment !== "") {
       const fileRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
       const responseFile = await uploadString(fileRef, attachment, "data_url");
-      console.log(responseFile.ref);
       attachmentUrl = await getDownloadURL(responseFile.ref).catch((error) => {
         console.log(error);
         switch (error.code) {
@@ -39,10 +38,11 @@ const Factory = ({ userObj }) => {
       });
     }
     try {
-      const docRef = await addDoc(collection(dbService, "petals"), {
+      await addDoc(collection(dbService, "petals"), {
         text: petal,
         createdAt: Date.now(),
         writerId: userObj.uid,
+        writer: userObj.displayName,
         attachmentUrl,
       });
       setPetal("");
