@@ -196,3 +196,11 @@ h3 {
   border: 2px solid #33691e;
   border-radius: 10px;
 }
+.likebtn{
+  border: none;
+  outline: none;
+  display: flex;
+  background-color: transparent;
+  color: #33691e;
+  cursor: pointer;
+}

@@ -18,8 +18,9 @@ const Auth = () => {
     } else if (name === "github") {
       provider = new GithubAuthProvider();
     }
-    const data = await signInWithPopup(authService, provider);
+    await signInWithPopup(authService, provider);
   };
+
   return (
     <div className={styles.authDep}>
       <div className={styles.authBundle}>

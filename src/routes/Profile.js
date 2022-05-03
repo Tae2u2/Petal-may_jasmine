@@ -25,6 +25,7 @@ const Profile = ({ userObj, refreshUser }) => {
         displayName: newDisplayName,
       });
       refreshUser();
+      alert("이름이 변경되었습니다!");
     } else if (userObj.displayName === newDisplayName) {
       alert("기존 이름으로는 바꿀 수 없습니다");
     }
@@ -38,32 +39,28 @@ const Profile = ({ userObj, refreshUser }) => {
       });
   };
 
-  const getMyPetals = async () => {
-    const petalRef = collection(dbService, "petals");
-    const q = query(
-      petalRef,
-      where("writerId", "==", `${userObj.uid}`),
-      orderBy("createdAt", "desc")
-    );
-    const petals = await getDocs(q);
-    let myArr = [];
-    petals.forEach(
-      (doc) =>
-        (myArr[myArr.length] = {
-          myText: doc.data().text,
-          myUrl: doc.data().attachmentUrl,
-        })
-    );
-    setMyPetals(myArr);
-  };
   useEffect(() => {
-    if (userObj.displayName == null) {
-      updateProfile(authService.currentUser, {
-        displayName: "jasmine",
-      });
+    async function getPetals() {
+      const petalRef = collection(dbService, "petals");
+      const q = query(
+        petalRef,
+        where("writerId", "==", `${userObj.uid}`),
+        orderBy("createdAt", "desc")
+      );
+      const petals = await getDocs(q);
+      let myArr = [];
+      petals.forEach(
+        (doc) =>
+          (myArr[myArr.length] = {
+            myText: doc.data().text,
+            myUrl: doc.data().attachmentUrl,
+            myLike: doc.data().likeCount,
+          })
+      );
+      setMyPetals(myArr);
     }
-    getMyPetals();
-  }, []);
+    getPetals();
+  }, [userObj]);
 
   return (
     <div className={style.homeDep}>
@@ -91,11 +88,14 @@ const Profile = ({ userObj, refreshUser }) => {
       <div className={style.homeDep}>
         {myPetals.map((my, index) => (
           <div key={index} className={style.textBox}>
-            <h4 style={{ marginBottom: "5px" }}>{userObj.displayName}</h4>
+            <div className={style.homeUl}>
+              <h4 style={{ marginBottom: "5px" }}>{userObj.displayName}</h4>
+              <span>💚 : {my.myLike}</span>
+            </div>
             <p className={style.contents}>{my.myText}</p>
             {my.myUrl && (
               <div className={style.together}>
-                <img src={my.myUrl} width="250px" height="250px" />
+                <img src={my.myUrl} width="250px" alt="mypageimage" />
               </div>
             )}
           </div>

@@ -4,12 +4,12 @@ import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
 import style from "css/HomeStyle.module.css";
 
-const Petals = ({ petalObj, isOwner, userObj }) => {
+const Petals = ({ petalObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
   const [revisedPetal, setrevisedPetal] = useState(petalObj.text);
-  const [counting, setCounting] = useState(0);
 
   const petalTextRef = doc(dbService, "petals", petalObj.id);
+
   const onDeleteClick = async () => {
     const ok = window.confirm("삭제하시겠습니까?");
     if (ok) {
@@ -27,7 +27,7 @@ const Petals = ({ petalObj, isOwner, userObj }) => {
     setrevisedPetal(value);
   };
 
-  const onSubmit = async (event) => {
+  const onEditSubmit = async (event) => {
     event.preventDefault();
     await updateDoc(petalTextRef, {
       text: revisedPetal,
@@ -35,58 +35,33 @@ const Petals = ({ petalObj, isOwner, userObj }) => {
     setEditing(false);
   };
 
-  /*이거 맘에드는 글을 저장하는 기능 추가해보기 */
-  const [likeList, setLikeList] = useState({});
-
-  const saveLike = (event) => {
-    const myLike = event.target.id;
-    if (myLike === petalObj.id) {
-      setLikeList({ ...petalObj });
-      console.log(likeList);
-    }
-  };
-
-  const likeHandle = (event) => {
-    setCounting(counting + 1);
+  const likeHandle = async () => {
+    await updateDoc(petalTextRef, {
+      likeCount: ++petalObj.likeCount,
+    });
   };
 
   const toggleEditing = () => setEditing((prev) => !prev);
+
   return (
     <div className={style.textBox} style={{ position: "relative" }}>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <h4 style={{ marginBottom: "5px" }}>{petalObj.writer}</h4>
         <div style={{ display: "flex" }}>
-          <span
-            style={{
-              cursor: "pointer",
-              transform: "translateY(-6px)",
-            }}
-            onClick={saveLike}
-            id={petalObj.id}
-          >
-            <ion-icon name="flower-outline" id={petalObj.id}></ion-icon>
-          </span>
-          <span
-            style={{
-              display: "flex",
-              cursor: "pointer",
-              transform: "translateY(-6px)",
-            }}
-            onClick={likeHandle}
-          >
+          <button className={style.likebtn} onClick={likeHandle}>
             <ion-icon name="heart-circle-outline"></ion-icon>
             <small style={{ color: "#bdbdbd", transform: "translateY(6px)" }}>
-              {counting}
+              {petalObj.likeCount}
             </small>
-          </span>
+          </button>
         </div>
       </div>
       {editing ? (
         <div className={style.contentsBox}>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={onEditSubmit}>
             <input
               className={style.homeInput}
-              style={{ width: "38px" }}
+              style={{ width: "382px" }}
               onChange={onChange}
               value={revisedPetal}
               required
@@ -102,7 +77,7 @@ const Petals = ({ petalObj, isOwner, userObj }) => {
           <p className={style.contents}>{petalObj.text}</p>
           {petalObj.attachmentUrl && (
             <div className={style.together}>
-              <img src={petalObj.attachmentUrl} width="250px" height="250px" />
+              <img src={petalObj.attachmentUrl} width="250px" alt="yourimage" />
             </div>
           )}
           {isOwner && (

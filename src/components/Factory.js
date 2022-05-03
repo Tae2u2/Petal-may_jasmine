@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { addDoc, collection } from "firebase/firestore";
 import style from "css/HomeStyle.module.css";
 
-const Factory = ({ userObj }) => {
+const Factory = ({ userObj, setChangeCheck, changeCheck }) => {
   const [petal, setPetal] = useState("");
   const [attachment, setAttachment] = useState("");
   const fileInput = useRef(null);
@@ -30,10 +30,8 @@ const Factory = ({ userObj }) => {
           case "storage/canceled":
             alert("It's been canceled. :: 취소되었습니다.");
             break;
-          case "storage/unknown":
-            // Unknown error occurred, inspect the server response
+          default:
             alert("Sorry, Please retry :: 죄송합니다. 다시 시도해주세요.");
-            break;
         }
       });
     }
@@ -41,6 +39,7 @@ const Factory = ({ userObj }) => {
       await addDoc(collection(dbService, "petals"), {
         text: petal,
         createdAt: Date.now(),
+        likeCount: 0,
         writerId: userObj.uid,
         writer: userObj.displayName,
         attachmentUrl,
@@ -48,8 +47,13 @@ const Factory = ({ userObj }) => {
       setPetal("");
       fileInput.current.value = null;
       setAttachment("");
+      if (changeCheck) {
+        setChangeCheck(false);
+      } else {
+        setChangeCheck(true);
+      }
     } catch (e) {
-      console.error("Error adding document: ", e);
+      alert("죄송합니다. 다시 시도해주세요!");
     }
   };
 
@@ -108,12 +112,7 @@ const Factory = ({ userObj }) => {
           />
           {attachment && (
             <div className={style.viewBox}>
-              <img
-                src={attachment}
-                alt="preview photo"
-                width="70px"
-                height="70px"
-              />
+              <img src={attachment} alt="preview" width="70px" height="70px" />
               <button className={style.clearBtn} onClick={onClearAttachment}>
                 Clear
               </button>

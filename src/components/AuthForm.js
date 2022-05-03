@@ -27,23 +27,12 @@ const AuthForm = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      let data;
       if (newAccount) {
         //회원가입
-        data = await createUserWithEmailAndPassword(
-          authService,
-          email,
-          password
-        ).then((userCredential) => {
-          const user = userCredential.user;
-        });
+        await createUserWithEmailAndPassword(authService, email, password);
       } else {
         //로그인
-        data = signInWithEmailAndPassword(authService, email, password).then(
-          (userCredential) => {
-            const user = userCredential.user;
-          }
-        );
+        signInWithEmailAndPassword(authService, email, password);
       }
     } catch (error) {
       const errorCode = error.code;
